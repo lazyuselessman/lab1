@@ -1,0 +1,6 @@
+venv/
+*.docx
+phones_backend/phones_api/__pycache__/
+phones_backend/phones_backend/__pycache__/
+phones_backend/phones_api/migrations/__pycache__/
+phones_backend/phones_backend/migrations/__pycache__/
