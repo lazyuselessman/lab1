@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'phones_api.apps.PhonesApiConfig',
     'corsheaders',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'phones_backend.wsgi.application'
+ASGI_APPLICATION = 'phones_backend.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
