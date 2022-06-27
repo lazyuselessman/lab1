@@ -3,6 +3,7 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
+from phones_api.task import calculate_numbers
 
 class PhoneConsumer(WebsocketConsumer):
     common_group_name = "common"
@@ -48,6 +49,8 @@ class PhoneConsumer(WebsocketConsumer):
                     "type": "number_delete",
                 }
             )
+        elif data["type"] == "calculate_numbers":
+            calculate_numbers.apply_async(queue="long_time_task")
 
     def number_add(self, event):
         print(f'Send number_add')
@@ -59,4 +62,8 @@ class PhoneConsumer(WebsocketConsumer):
 
     def number_delete(self, event):
         print(f'Send delete')
+        self.send(text_data=json.dumps(event))
+
+    def calculate_numbers(self, event):
+        print(f'calculate numbers')
         self.send(text_data=json.dumps(event))
